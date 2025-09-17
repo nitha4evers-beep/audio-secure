@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Audio Player</title>
+    <style>
+        body { text-align: center; padding: 20px; font-family: Arial, sans-serif; }
+        audio { width: 100%; max-width: 600px; }
+        #audioContainer { display: none; margin-top: 20px; }
+        #passwordForm { margin-top: 20px; }
+        #errorMsg { color: red; display: none; }
+    </style>
+</head>
+<body>
+    <h1>Enjoy the Audio!</h1>
+
+    <!-- Password Input Form -->
+    <div id="passwordForm">
+      <p>Please enter password to access the audio:</p>
+      <input type="password" id="passwordInput" placeholder="Enter password">
+      <button id="submitBtn">Submit</button>
+      <div id="errorMsg">Wrong password. Try again.</div>
+    </div>
+
+    <!-- Audio player, hidden until correct password -->
+    <div id="audioContainer">
+        <audio controls autoplay>
+            <source src="D:\praneetha\audio\riser-hit-sfx-001-289802.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+      // Set your desired password here:
+      const correctPassword = "123";
+
+      const submitBtn = document.getElementById("submitBtn");
+      const pwdInput = document.getElementById("passwordInput");
+      const audioContainer = document.getElementById("audioContainer");
+      const passwordForm = document.getElementById("passwordForm");
+      const errorMsg = document.getElementById("errorMsg");
+
+      submitBtn.addEventListener("click", function() {
+        const entered = pwdInput.value;
+        if (entered === correctPassword) {
+          // Hide password form
+          passwordForm.style.display = "none";
+          errorMsg.style.display = "none";
+          // Show audio
+          audioContainer.style.display = "block";
+        } else {
+          // Show error
+          errorMsg.style.display = "block";
+        }
+      });
+
+      // Also, allow pressing Enter key in password field
+      pwdInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+          submitBtn.click();
+        }
+      });
+    </script>
+</body>
+</html>
